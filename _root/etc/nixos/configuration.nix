@@ -24,9 +24,9 @@
     # wireless.enable = true;  # Enables wireless.
     networkmanager.enable = true; # Enable NetworkManager
     # Static IP setting
-    interfaces.enp19s0.ip4 = [ { address = "192.168.10.2"; prefixLength = 24; } ];
-    defaultGateway = "192.168.10.1";
-    nameservers = [ "8.8.8.8" ];
+    # interfaces.enp19s0.ip4 = [ { address = "192.168.10.2"; prefixLength = 24; } ];
+    # defaultGateway = "192.168.10.1";
+    # nameservers = [ "8.8.8.8" ];
   };
 
   # Set timezone
@@ -57,30 +57,33 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Utils
-    wget
     dmenu
-    xclip
+    file
+    gmrun
     rxvt_unicode
+    wget
+    xclip
     # Lightweight Browser
     surf
     w3m
     # Full Browser
-    firefoxWrapper
     chromium
+    firefoxWrapper
     # Entertainment
     mpv
     # Dev stuff
-    # haskellPackages.yi
-    vimHugeX
+    darcs
     gitAndTools.gitFull
+    haskellPackages.yi
+    vimHugeX
     # Compiler
-    haskellPackages.ghc
+    clang
     fpc
     gcc
-    clang
+    haskellPackages.ghc
     # Build system
     gnumake
-    # haskellPackages.shake
+    haskellPackages.shake
     # Messaging
     hexchat
   ];
@@ -146,7 +149,6 @@
     description = "Adit Cahya Ramadhan";
     extraGroups = ["wheel" "networkmanager"];
   };
- 
 }
 
 # vim:sw=2:ts=2:et:ai:bs=indent,eol,start
