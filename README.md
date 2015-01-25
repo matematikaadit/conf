@@ -6,34 +6,16 @@ Repository of configruation and dotfiles.
 Usage
 -----
 
-We will use this term in this project.
+Clone the repo first
 
-- **target**, the configuration files that lives in it's proper place.
-- **source**, the source of the corresponding target that lives in this repo.
+    git clone git@github.com:matematikaadit/conf.git
 
-Here are few commands that could be run to automate some tasks.
+Below list of `make` command that could be execute
 
-- `make`,  for syncronizing the target and the source. The difference between
-  both files will be merged and reflected in both files to make both identical.
-  If there's conflict when merging, an error will be reported and the files
-  will be kept intact. An alias for `make sync`
-- `make diff`, for showing the diff of the conflicted files from running `make
-  sync`.
-
-Take a note that you'll need sudo if you're overwriting a target that only
-writable by super user.
-
-There's a convention for the ease of use of writing new configuartion. Here are
-a few of them.
-
-- The target of source under `_root` directory is the same path that
-  represented by that source with `_root/` replaced by the real file system
-  root, `/`.  For example, the target of the
-  `_root/etc/nixos/configuration.nix` is `/etc/nixos/configuration.nix`.
-- Everything else will have target path under `$HOME` directory, but with
-  underscore in front of that path (if present) replaced by dot. For example,
-  the target of `_vimrc` is `$HOME/.vimrc` and the target of
-  `_xmonad/xmonad.hs` is `$HOME/.xmonad/xmonad.hs`.
+- `make usage`: seeing usage
+- `make pull`: pull changes from configuration target
+- `make push`: push changes to configuration target
+- `make diff`: diff changes between configuration target and source
 
 License
 -------
