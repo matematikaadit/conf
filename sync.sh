@@ -30,7 +30,11 @@ for src in $(find . -wholename './_*' -type f); do
       cp "$target" "$src"
     ;;
     diff)
-      diff -u "$target" "$src"
+      if [ -f "$target" ]; then
+        diff -u "$target" "$src" || true
+      else
+        diff -u /dev/null "$src" || true
+      fi
     ;;
   esac
 done
