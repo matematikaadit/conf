@@ -10,12 +10,16 @@ Clone the repo first
 
     git clone git@github.com:matematikaadit/conf.git
 
-Below list of `make` command that could be execute
+Then, rebuild the Shake build system. Also make sure you've installed ghc and
+shake.
 
-- `make usage`: seeing usage
-- `make pull`: pull changes from configuration target
-- `make push`: push changes to configuration target
-- `make diff`: diff changes between configuration target and source
+    ./rebuild.sh
+
+Command list:
+
+- `.shake/build pull`: pull changes from configuration target
+- `.shake/build push`: push changes into configuration target
+- `.shake/build diff`: diff changes between configuration target and source
 
 License
 -------
