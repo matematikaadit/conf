@@ -22,7 +22,7 @@ for src in $(find . -wholename './_*' -type f); do
     push)
       if [ "$needsudo" ]; then
         (sudo cp "$src" "$target")
-        needsudo=""
+        unset needsudo
       else
         cp "$src" "$target"
       fi
