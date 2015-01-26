@@ -20,7 +20,7 @@ for src in $(find . -wholename './_*' -type f); do
   fi
   case "$1" in
     push)
-      if [ "needsudo" ]; then
+      if [ "$needsudo" ]; then
         (sudo "$src" "$target")
       else
         cp "$src" "$target"
