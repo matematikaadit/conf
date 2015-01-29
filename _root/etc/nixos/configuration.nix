@@ -21,12 +21,13 @@
   networking = {
     hostName = "nixos"; # Define your hostname.
     hostId = "578f496d";
-    # wireless.enable = true;  # Enables wireless.
     networkmanager.enable = true; # Enable NetworkManager
-    # Static IP setting
-    # interfaces.enp19s0.ip4 = [ { address = "192.168.10.2"; prefixLength = 24; } ];
-    # defaultGateway = "192.168.10.1";
-    # nameservers = [ "8.8.8.8" ];
+
+    # Extrahosts
+    extraHosts = ''
+      192.168.0.1 lan
+      192.168.1.1 modem
+    '';
   };
 
   # Set timezone
@@ -43,13 +44,7 @@
     allowUnfree = true;
 
     firefox = {
-      enableGoogleTalkPlugin = true;
       enableAdobeFlash = true;
-    };
-
-    chromium = {
-      enablePepperFlash = true;
-      enablePepperPDF = true;
     };
   };
 
@@ -57,44 +52,50 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Utils
+    anki
     dmenu
+    feh
     file
     gmrun
+    mupdf
+    nix-repl
     rxvt_unicode
+    tree
     wget
     xclip
+
     # Lightweight Browser
     surf
     w3m
+
     # Full Browser
-    chromium
     firefoxWrapper
+
     # Entertainment
     mpv
+    openttd
+    timidity # openttd deps (midi renderer)
+    transmission_gtk
+
     # Dev stuff
     darcs
     gitAndTools.gitFull
     haskellPackages.yi
     vimHugeX
+
     # Compiler
     clang
     fpc
     gcc
     haskellPackages.ghc
+
     # Build system
     gnumake
     haskellPackages.shake
+
     # Messaging
     hexchat
   ];
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -116,19 +117,23 @@
 
     displayManager = {
       # Change default cursor from X to left pointer
-      sessionCommands = "xsetroot -cursor_name left_ptr";
+      sessionCommands = with pkgs.xlibs; ''
+        ${xsetroot}/bin/xsetroot -cursor_name left_ptr
+      '';
+
       slim = {
         enable = true;
         defaultUser = "adit";
-        # autoLogin = true;
+        autoLogin = false;
+        theme = pkgs.fetchurl {
+          url = mirror://sourceforge/slim.berlios/slim-wave.tar.gz;
+          sha256 = "0ndr419i5myzcylvxb89m9grl2xyq6fbnyc3lkd711mzlmnnfxdy";
+        };
       };
     };
 
     synaptics.enable = true;
   };
-
-  # Show nixos manual in tty 8
-  services.nixosManual.showManual = true;
 
   # Fonts https://nixos.org/wiki/Fonts
   fonts = {
@@ -138,6 +143,8 @@
     fonts = with pkgs; [
       inconsolata
       ubuntu_font_family
+      # Japanese font
+      kochi-substitute
     ];
   };
 
