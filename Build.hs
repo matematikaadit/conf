@@ -20,6 +20,7 @@ cmdPairDo act fn = do
 
 main :: IO ()
 main = shakeArgs shakeOptions{shakeFiles=".shake/"} $ do
-    phony "pull" $ cmdPairDo "cp" (\cp s t -> cp [t, s])
-    phony "push" $ cmdPairDo "cp" (\cp s t -> cp [s, t])
+    phony "pull" $ cmdPairDo "cp -av" (\cp s t -> cp [t, s])
+    phony "push" $ cmdPairDo "cp -av" (\cp s t -> cp [s, t])
     phony "diff" $ cmdPairDo "diff -u" (\diff s t -> diff [t, s])
+
